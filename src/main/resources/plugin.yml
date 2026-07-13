@@ -1,0 +1,20 @@
+name: PromoTimeCode
+version: 1.0.0
+main: com.yourname.promotimecode.PromoTimeCode
+api-version: 1.13
+depend: [LuckPerms]
+description: Реферальная программа для ютуберов
+author: Kvassuk
+
+commands:
+  promocode:
+    description: Основная команда плагина
+    aliases: [promo]
+
+permissions:
+  promotimecode.admin:
+    description: Админ доступ
+    default: op
+  promotimecode.youtube:
+    description: Доступ ютубера
+    default: false
