@@ -70,20 +70,17 @@ public class DataManager {
         saveAll();
     }
 
-    public void clearPlayerData(Player p) {
-        playerDataMap.remove(p.getUniqueId());
-        saveAll();
-    }
-
     public static class PlayerData {
         public String activeCode = null;
         public int playedSeconds = 0;
         public boolean redeemed = false;
+        public String activationIp = null;
 
         public PlayerData() {
             this.activeCode = null;
             this.playedSeconds = 0;
             this.redeemed = false;
+            this.activationIp = null;
         }
     }
 }

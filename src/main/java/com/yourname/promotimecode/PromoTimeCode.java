@@ -44,6 +44,9 @@ public final class PromoTimeCode extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
 
+        AntiAbuseManager antiAbuse = new AntiAbuseManager();
+        getServer().getPluginManager().registerEvents(antiAbuse, this);
+
         int checkInterval = getConfig().getInt("settings.check-interval-seconds", 10);
         long ticks = checkInterval * 20L;
 
@@ -86,6 +89,9 @@ public final class PromoTimeCode extends JavaPlugin implements Listener {
     public void onDisable() {
         if (dataManager != null) {
             dataManager.saveAll();
+        }
+        if (AntiAbuseManager.getInstance() != null) {
+            AntiAbuseManager.getInstance().saveIpData();
         }
         if (playtimeChecker != null) {
             playtimeChecker.cancel();

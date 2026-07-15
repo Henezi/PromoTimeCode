@@ -11,9 +11,8 @@ import java.util.List;
 
 public class MainTabCompleter implements TabCompleter {
 
-    // Базовый список команд (можно расширять)
     private static final List<String> COMMANDS = Arrays.asList(
-            "help", "create", "info", "progress", "show", "reload", "balance", "delete"
+            "help", "create", "info", "progress", "show", "reload", "balance", "delete", "ipstats"
     );
 
     @Override
@@ -23,11 +22,10 @@ public class MainTabCompleter implements TabCompleter {
         if (args.length == 1) {
             String partial = args[0].toLowerCase();
             for (String cmd : COMMANDS) {
-                // Проверяем права на команды
-                if (cmd.equals("create") && !sender.hasPermission("promotimecode.youtube") && !sender.isOp()) {
+                if ((cmd.equals("create") || cmd.equals("info")) && !sender.hasPermission("promotimecode.youtube") && !sender.isOp()) {
                     continue;
                 }
-                if ((cmd.equals("show") || cmd.equals("reload") || cmd.equals("balance") || cmd.equals("delete"))
+                if ((cmd.equals("show") || cmd.equals("reload") || cmd.equals("balance") || cmd.equals("delete") || cmd.equals("ipstats"))
                         && !sender.hasPermission("promotimecode.admin") && !sender.isOp()) {
                     continue;
                 }
@@ -39,20 +37,28 @@ public class MainTabCompleter implements TabCompleter {
             String firstArg = args[0].toLowerCase();
             String partial = args[1].toLowerCase();
 
-            // Для команды balance - на втором аргументе показываем add/remove
             if (firstArg.equals("balance")) {
                 if ("add".startsWith(partial)) suggestions.add("add");
                 if ("remove".startsWith(partial)) suggestions.add("remove");
             }
 
-            // Для команды delete - на втором аргументе показываем коды
+            if (firstArg.equals("ipstats")) {
+                if (sender.hasPermission("promotimecode.admin") || sender.isOp()) {
+                    List<String> players = AntiAbuseManager.getInstance().getAllPlayersWithIp();
+                    for (String name : players) {
+                        if (name.toLowerCase().startsWith(partial.toLowerCase())) {
+                            suggestions.add(name);
+                        }
+                    }
+                }
+            }
+
             if (firstArg.equals("delete")) {
                 if (sender.hasPermission("promotimecode.admin") || sender.isOp()) {
                     addCodeSuggestions(suggestions, partial);
                 }
             }
 
-            // Для команды show - на втором аргументе показываем коды
             if (firstArg.equals("show")) {
                 if (sender.hasPermission("promotimecode.admin") || sender.isOp()) {
                     addCodeSuggestions(suggestions, partial);
@@ -64,7 +70,6 @@ public class MainTabCompleter implements TabCompleter {
             String secondArg = args[1].toLowerCase();
             String partial = args[2].toLowerCase();
 
-            // Для balance add/remove - на третьем аргументе показываем коды
             if (firstArg.equals("balance") && (secondArg.equals("add") || secondArg.equals("remove"))) {
                 if (sender.hasPermission("promotimecode.admin") || sender.isOp()) {
                     addCodeSuggestions(suggestions, partial);
@@ -75,7 +80,6 @@ public class MainTabCompleter implements TabCompleter {
         return suggestions;
     }
 
-    // ===== ВСПОМОГАТЕЛЬНЫЙ МЕТОД: Добавить коды в подсказки =====
     private void addCodeSuggestions(List<String> suggestions, String partial) {
         File codesFolder = new File(PromoTimeCode.getInstance().getDataFolder(), "codes");
         File[] files = codesFolder.listFiles((dir, name) -> name.endsWith(".json"));

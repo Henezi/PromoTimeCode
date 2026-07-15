@@ -1,5 +1,6 @@
 package com.yourname.promotimecode;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,11 +58,12 @@ public class MainCommand implements CommandExecutor {
                 sender.sendMessage(color("&e/" + label + " show <код> &7- " + getMsg("help-show")));
                 sender.sendMessage(color("&e/" + label + " balance add/remove <код> <сумма> &7- " + getMsg("help-balance")));
                 sender.sendMessage(color("&e/" + label + " delete <код> &7- " + getMsg("help-delete")));
+                sender.sendMessage(color("&e/" + label + " ipstats <игрок> &7- Информация по IP"));
             }
             return true;
         }
 
-// --- PROGRESS ---
+        // --- PROGRESS ---
         if (args[0].equalsIgnoreCase("progress")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(color(getPrefix() + getMsg("only-player")));
@@ -109,7 +110,6 @@ public class MainCommand implements CommandExecutor {
             Player p = (Player) sender;
             String playerName = p.getName();
 
-            // Проверяем, есть ли уже код у этого ютубера
             if (config.getBoolean("settings.one-code-per-youtuber", true)) {
                 CodeManager.PromoCode existingCode = PromoTimeCode.getInstance().getCodeManager().findCodeByAuthor(playerName);
                 if (existingCode != null && !sender.isOp()) {
@@ -231,8 +231,14 @@ public class MainCommand implements CommandExecutor {
                 sender.sendMessage(color(getPrefix() + getMsg("no-permission")));
                 return true;
             }
+
+            PromoTimeCode.getInstance().getDataManager().saveAll();
+            AntiAbuseManager.getInstance().saveIpData();
+
             PromoTimeCode.getInstance().reloadConfig();
             PromoTimeCode.getInstance().getDataManager().load();
+            AntiAbuseManager.getInstance().reload();
+
             sender.sendMessage(color(getPrefix() + getMsg("reloaded")));
             return true;
         }
@@ -269,6 +275,23 @@ public class MainCommand implements CommandExecutor {
                     .replace("%completed%", String.valueOf(promoCode.completedPlayers))));
             sender.sendMessage(color(getMsg("show-balance")
                     .replace("%balance%", String.valueOf(promoCode.balance))));
+            return true;
+        }
+
+        // --- IP STATS (админ) ---
+        if (args[0].equalsIgnoreCase("ipstats") && args.length >= 2) {
+            if (!sender.hasPermission("promotimecode.admin") && !sender.isOp()) {
+                sender.sendMessage(color(getPrefix() + getMsg("no-permission")));
+                return true;
+            }
+            Player target = Bukkit.getPlayerExact(args[1]);
+            if (target == null) {
+                sender.sendMessage(color("&cИгрок не найден!"));
+                return true;
+            }
+            String stats = AntiAbuseManager.getInstance().getIpStats(target);
+            sender.sendMessage(color("&6IP статистика для &e" + target.getName() + "&6:"));
+            sender.sendMessage(color("&7" + stats));
             return true;
         }
 

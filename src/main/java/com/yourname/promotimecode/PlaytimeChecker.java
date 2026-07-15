@@ -56,7 +56,11 @@ public class PlaytimeChecker extends BukkitRunnable {
                 continue;
             }
 
-            // ===== УВЕЛИЧИВАЕМ ТОЛЬКО КОГДА ИГРОК ОНЛАЙН =====
+
+            if (!AntiAbuseManager.getInstance().shouldCountTime(p)) {
+                continue;
+            }
+
             data.playedSeconds += checkInterval;
 
             int elapsedMinutes = data.playedSeconds / 60;
@@ -116,6 +120,12 @@ public class PlaytimeChecker extends BukkitRunnable {
                 String groupName = code.groupName.toLowerCase();
                 long durationMillis = TimeUnit.MINUTES.toMillis(code.durationMinutes);
                 Instant expiry = Instant.now().plusMillis(durationMillis);
+
+                boolean hasGroup = user.getCachedData().getPermissionData().checkPermission("group." + groupName).asBoolean();
+
+                if (hasGroup) {
+                    p.sendMessage("§eУ вас уже есть группа " + groupName + "! Время продлено на " + code.durationMinutes + " минут.");
+                }
 
                 user.data().add(Node.builder("group." + groupName)
                         .expiry(expiry)

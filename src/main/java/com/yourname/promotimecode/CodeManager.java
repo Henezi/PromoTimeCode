@@ -72,11 +72,20 @@ public class CodeManager {
         if (promoCode == null) return false;
         if (hasActiveCode(p)) return false;
 
+        if (!AntiAbuseManager.getInstance().checkIpLimit(p)) {
+            p.sendMessage("§cВы не можете активировать код! Слишком много активаций с вашего IP.");
+            p.sendMessage("§7Максимум: " + PromoTimeCode.getInstance().getConfig().getInt("anti-abuse.max-activations-per-ip", 3) + " аккаунтов.");
+            return false;
+        }
+
         DataManager.PlayerData data = PromoTimeCode.getInstance().getDataManager().getPlayerData(p);
         data.activeCode = code;
-        data.playedSeconds = 0;  // ← ОБНУЛЯЕМ при активации
+        data.playedSeconds = 0;
         data.redeemed = false;
+        data.activationIp = p.getAddress().getAddress().getHostAddress();
         PromoTimeCode.getInstance().getDataManager().setPlayerData(p, data);
+
+        AntiAbuseManager.getInstance().registerActivation(p);
 
         if (!promoCode.players.contains(p.getUniqueId().toString())) {
             promoCode.players.add(p.getUniqueId().toString());
@@ -85,7 +94,6 @@ public class CodeManager {
         return true;
     }
 
-    // ===== НОВЫЙ МЕТОД: Получить все коды =====
     public List<PromoCode> getAllCodes() {
         List<PromoCode> codes = new ArrayList<>();
         File[] files = codesFolder.listFiles((dir, name) -> name.endsWith(".json"));
@@ -101,7 +109,6 @@ public class CodeManager {
         return codes;
     }
 
-    // ===== НОВЫЙ МЕТОД: Найти код по автору =====
     public PromoCode findCodeByAuthor(String author) {
         for (PromoCode code : getAllCodes()) {
             if (code.author.equalsIgnoreCase(author)) {
@@ -111,7 +118,6 @@ public class CodeManager {
         return null;
     }
 
-    // ===== НОВЫЙ МЕТОД: Удалить код =====
     public boolean deleteCode(String code) {
         File codeFile = new File(codesFolder, code + ".json");
         return codeFile.delete();
