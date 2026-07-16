@@ -1,0 +1,25 @@
+name: PromoTimeCode
+version: 2.0.0
+main: com.kvassuk.promotimecode.PromoTimeCode
+api-version: 1.17
+depend: [LuckPerms]
+softdepend: [PlaceholderAPI]
+description: Реферальная программа для YouTube-блогеров
+author: Kvassuk
+
+commands:
+  promo:
+    description: Основная команда плагина
+    usage: /promo <help|create|delete|reload|info|progress|activate|top|balance|export|gui>
+    aliases: [promocode]
+
+permissions:
+  promotimecode.admin:
+    description: Полный доступ к плагину
+    default: op
+  promotimecode.youtube:
+    description: Доступ для ютуберов
+    default: false
+  promotimecode.bypass:
+    description: Обход ограничений
+    default: false

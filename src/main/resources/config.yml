@@ -1,0 +1,28 @@
+# ============================================================
+#                   PromoTimeCode v2 Config
+# ============================================================
+
+# Основные настройки
+settings:
+  # Язык плагина (en, ru, uk, de, fr)
+  language: ru
+
+  # Интервал проверки времени в секундах
+  check-interval-seconds: 10
+
+  # Интервал автосохранения в секундах
+  save-interval-seconds: 60
+
+  # Режим отладки (логирует больше информации)
+  debug-mode: false
+
+  # Создавать бэкап при запуске сервера
+  backup-on-startup: true
+
+  # Настройки по умолчанию для новых промокодов
+  default-duration-minutes: 2
+  default-balance: 50.0
+  default-playtime-minutes: 1
+
+  # Ограничение: 1 код на ютубера
+  one-code-per-youtuber: true

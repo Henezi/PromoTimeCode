@@ -1,0 +1,152 @@
+# ============================================================
+#                   PromoTimeCode Language File
+#                     English (en)
+# ============================================================
+
+# Префикс плагина
+prefix: "<gold>[Promo]</gold> <reset>"
+
+# ============================================================
+#                    COMMANDS
+# ============================================================
+commands:
+  help: "<green>/promo help <gray>- Show help</gray></green>"
+  activate: "<green>/promo <code> <gray>- Activate a promo code</gray></green>"
+  progress: "<green>/promo progress <gray>- Show your progress</gray></green>"
+  create: "<green>/promo create <code> <gray>- Create a promo code</gray></green>"
+  info: "<green>/promo info <gray>- Info about your code</gray></green>"
+  show: "<green>/promo show <code> <gray>- View code info</gray></green>"
+  balance: "<green>/promo balance add/remove <code> <amount> <gray>- Change balance</gray></green>"
+  delete: "<green>/promo delete <code> <gray>- Delete a code</gray></green>"
+  reload: "<green>/promo reload <gray>- Reload the plugin</gray></green>"
+  ipstats: "<green>/promo ipstats <player> <gray>- View IP statistics</gray></green>"
+  top: "<green>/promo top <gray>- Show top codes</gray></green>"
+  export: "<green>/promo export <gray>- Export data to CSV</gray></green>"
+  gui: "<green>/promo gui <gray>- Open admin panel</gray></green>"
+  backup: "<green>/promo backup <gray>- Manage backups</gray></green>"
+
+# ============================================================
+#                    HELP
+# ============================================================
+help:
+  header: "<gold>=== PromoTimeCode Help ===</gold>"
+  player: "<gold>-- Player Commands --</gold>"
+  youtuber: "<gold>-- YouTuber Commands --</gold>"
+  admin: "<gold>-- Admin Commands --</gold>"
+  page: "Page %page%/%total%"
+
+# ============================================================
+#                    GENERAL MESSAGES
+# ============================================================
+messages:
+  no-permission: "<red>You don't have permission to do this!</red>"
+  only-player: "<red>This command is only for players!</red>"
+  reloaded: "<green>Plugin reloaded successfully!</green>"
+  code-created: "<green>Promo code <gold>%code%</gold> created!</green>"
+  code-created-details:
+    - "<gray>├─ Group: <gold>%group%</gold> for <gold>%duration%</gold> minutes</gray>"
+    - "<gray>├─ YouTuber reward: <gold>%reward%</gold> coins</gray>"
+    - "<gray>└─ Required playtime: <gold>%playtime%</gold> minutes</gray>"
+  code-already-exists: "<red>This code already exists!</red>"
+  code-not-found: "<red>Code not found!</red>"
+  code-activated: "<green>You activated code <gold>%code%</gold>!</green>"
+  code-activated-hint: "<gray>Play <gold>%time%</gold> minutes to receive your reward</gray>"
+  already-has-code: "<red>You already have an active code!</red>"
+  already-has-code-hint: "<gray>You can only have one active promo code</gray>"
+  cannot-activate-own-code: "<red>You cannot activate your own code!</red>"
+  cannot-activate-own-code-hint: "<gray>This is to prevent abuse</gray>"
+  no-active-code: "<red>You don't have an active code!</red>"
+  code-deleted: "<green>Code <gold>%code%</gold> deleted!</green>"
+  code-delete-error: "<red>Failed to delete code!</red>"
+  invalid-amount: "<red>Invalid amount!</red>"
+  invalid-action: "<red>Use: /promo balance add/remove <code> <amount></red>"
+  player-not-found: "<red>Player not found!</red>"
+  you-already-have-code: "<red>You already have a promo code <gold>%code%</gold>!</red>"
+  your-code-info: "<gray>Use <green>/promo info</green> to view your code</gray>"
+  ip-limit-block: "<red>You cannot activate code! Too many activations from your IP.</red>"
+  ip-limit-block-hint: "<gray>Maximum: <gold>%max%</gold> accounts</gray>"
+  no-codes-found: "<red>You don't have any created codes!</red>"
+  export-success: "<green>Data exported to <gold>%file%</gold>!</green>"
+  export-error: "<red>Failed to export data!</red>"
+  code-done: "<green>Congratulations! You completed the conditions!</green>"
+
+# ============================================================
+#                    AFK MESSAGES
+# ============================================================
+afk:
+  warning: "<red>⚠ You appear AFK! Promo timer <bold>PAUSED</bold></red>"
+  warning-hint: "<gray>Move around to continue the timer</gray>"
+  resume: "<green>✅ You are active again! Timer resumed.</green>"
+
+# ============================================================
+#                    PROGRESS
+# ============================================================
+progress:
+  title: "<gold>=== Progress for code <gold>%code%</gold> ===</gold>"
+  played: "<gray>Played: <green>%current%</green>/<gold>%need%</gold> <gray>minutes</gray>"
+  status-waiting: "<gray>Status: <yellow>⏳ Waiting...</yellow></gray>"
+  status-done: "<gray>Status: <green>✅ Reward received!</green></gray>"
+
+# ============================================================
+#                    REWARD
+# ============================================================
+reward:
+  done: "<green>Congratulations! You completed the conditions!</green>"
+  details:
+    - "<gray>├─ Group: <gold>%group%</gold> for <gold>%time%</gold> minutes</gray>"
+    - "<gray>└─ YouTuber received: <gold>%reward%</gold> coins</gray>"
+  group-given: "<green>You received group <gold>%group%</gold> for <gold>%time%</gold> minutes!</green>"
+  already-has-group: "<gold>You already have group %group%! Time extended by %time% minutes.</gold>"
+
+# ============================================================
+#                    INFO
+# ============================================================
+info:
+  title: "<gold>=== Your promo code <gold>%code%</gold> ===</gold>"
+  group: "<gray>Group: <gold>%group%</gold></gray>"
+  duration: "<gray>Duration: <gold>%duration%</gold> minutes</gray>"
+  reward: "<gray>YouTuber reward: <gold>%reward%</gold> coins</gray>"
+  playtime: "<gray>Required playtime: <gold>%playtime%</gold> minutes</gray>"
+  players: "<gray>Players: <gold>%players%</gold></gray>"
+  completed: "<gray>Completed: <gold>%completed%</gold></gray>"
+  balance: "<gray>Current balance: <gold>%balance%</gold> coins</gray>"
+
+# ============================================================
+#                    SHOW (Admin)
+# ============================================================
+show:
+  title: "<gold>=== Code info <gold>%code%</gold> ===</gold>"
+  author: "<gray>Author: <gold>%author%</gold></gray>"
+  group: "<gray>Group: <gold>%group%</gold></gray>"
+  duration: "<gray>Duration: <gold>%duration%</gold> minutes</gray>"
+  reward: "<gray>YouTuber reward: <gold>%reward%</gold> coins</gray>"
+  playtime: "<gray>Required playtime: <gold>%playtime%</gold> minutes</gray>"
+  players: "<gray>Players: <gold>%players%</gold></gray>"
+  completed: "<gray>Completed: <gold>%completed%</gold></gray>"
+  balance: "<gray>Balance: <gold>%balance%</gold> coins</gray>"
+
+# ============================================================
+#                    BALANCE
+# ============================================================
+balance:
+  added: "<green>Added <gold>%amount%</gold> to balance of code <gold>%code%</gold></green>"
+  removed: "<green>Removed <gold>%amount%</gold> from balance of code <gold>%code%</gold></green>"
+  current: "<gray>Current balance: <gold>%balance%</gold> coins</gray>"
+  invalid-amount: "<red>Please enter a valid number!</red>"
+  invalid-action: "<red>Use: /promo balance add/remove <code> <amount></red>"
+
+# ============================================================
+#                    TOP
+# ============================================================
+top:
+  title: "<gold>=== Top Promo Codes ===</gold>"
+  no-codes: "<gray>No codes found</gray>"
+
+# ============================================================
+#                    IP STATS
+# ============================================================
+ipstats:
+  title: "<gold>=== IP Statistics for <gold>%player%</gold> ===</gold>"
+  info: "<gray>%info%</gray>"
+  activations: "<gray>Total activations from this IP: <gold>%count%</gold></gray>"
+  no-data: "<gray>No IP data found</gray>"

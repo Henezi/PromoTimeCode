@@ -1,0 +1,152 @@
+# ============================================================
+#                   PromoTimeCode Language File
+#                     Русский (ru)
+# ============================================================
+
+# Префикс плагина
+prefix: "<gold>[Promo]</gold> <reset>"
+
+# ============================================================
+#                    КОМАНДЫ
+# ============================================================
+commands:
+  help: "<green>/promo help <gray>- Показать справку</gray></green>"
+  activate: "<green>/promo <code> <gray>- Активировать промокод</gray></green>"
+  progress: "<green>/promo progress <gray>- Показать прогресс</gray></green>"
+  create: "<green>/promo create <code> <gray>- Создать промокод</gray></green>"
+  info: "<green>/promo info <gray>- Информация о вашем коде</gray></green>"
+  show: "<green>/promo show <code> <gray>- Информация о коде</gray></green>"
+  balance: "<green>/promo balance add/remove <code> <amount> <gray>- Изменить баланс</gray></green>"
+  delete: "<green>/promo delete <code> <gray>- Удалить промокод</gray></green>"
+  reload: "<green>/promo reload <gray>- Перезагрузить плагин</gray></green>"
+  ipstats: "<green>/promo ipstats <player> <gray>- Статистика по IP</gray></green>"
+  top: "<green>/promo top <gray>- ТОП промокодов</gray></green>"
+  export: "<green>/promo export <gray>- Экспорт данных в CSV</gray></green>"
+  gui: "<green>/promo gui <gray>- Открыть админ панель</gray></green>"
+  backup: "<green>/promo backup <gray>- Управление бэкапами</gray></green>"
+
+# ============================================================
+#                    ПОМОЩЬ
+# ============================================================
+help:
+  header: "<gold>=== Помощь PromoTimeCode ===</gold>"
+  player: "<gold>-- Команды для игроков --</gold>"
+  youtuber: "<gold>-- Команды для ютуберов --</gold>"
+  admin: "<gold>-- Команды для администраторов --</gold>"
+  page: "Страница %page%/%total%"
+
+# ============================================================
+#                    ОБЩИЕ СООБЩЕНИЯ
+# ============================================================
+messages:
+  no-permission: "<red>У вас нет прав на это!</red>"
+  only-player: "<red>Эта команда только для игроков!</red>"
+  reloaded: "<green>Плагин успешно перезагружен!</green>"
+  code-created: "<green>Промокод <gold>%code%</gold> создан!</green>"
+  code-created-details:
+    - "<gray>├─ Группа: <gold>%group%</gold> на <gold>%duration%</gold> мин</gray>"
+    - "<gray>├─ Награда ютуберу: <gold>%reward%</gold> монет</gray>"
+    - "<gray>└─ Нужно отыграть: <gold>%playtime%</gold> минут</gray>"
+  code-already-exists: "<red>Такой промокод уже существует!</red>"
+  code-not-found: "<red>Промокод не найден!</red>"
+  code-activated: "<green>Вы активировали код <gold>%code%</gold>!</green>"
+  code-activated-hint: "<gray>Отыграйте <gold>%time%</gold> минут для получения награды</gray>"
+  already-has-code: "<red>У вас уже есть активный промокод!</red>"
+  already-has-code-hint: "<gray>Вы можете иметь только один активный промокод</gray>"
+  cannot-activate-own-code: "<red>Вы не можете активировать свой собственный промокод!</red>"
+  cannot-activate-own-code-hint: "<gray>Это сделано для предотвращения накрутки</gray>"
+  no-active-code: "<red>У вас нет активного промокода!</red>"
+  code-deleted: "<green>Промокод <gold>%code%</gold> удалён!</green>"
+  code-delete-error: "<red>Ошибка при удалении промокода!</red>"
+  invalid-amount: "<red>Введите корректное число!</red>"
+  invalid-action: "<red>Используйте: /promo balance add/remove <code> <amount></red>"
+  player-not-found: "<red>Игрок не найден!</red>"
+  you-already-have-code: "<red>У вас уже есть промокод <gold>%code%</gold>!</red>"
+  your-code-info: "<gray>Используйте <green>/promo info</green> для просмотра</gray>"
+  ip-limit-block: "<red>Вы не можете активировать код! Слишком много активаций с вашего IP.</red>"
+  ip-limit-block-hint: "<gray>Максимум: <gold>%max%</gold> аккаунтов</gray>"
+  no-codes-found: "<red>У вас нет созданных промокодов!</red>"
+  export-success: "<green>Данные экспортированы в <gold>%file%</gold>!</green>"
+  export-error: "<red>Ошибка при экспорте данных!</red>"
+  code-done: "<green>Поздравляем! Вы выполнили условия промокода!</green>"
+
+# ============================================================
+#                    AFK СООБЩЕНИЯ
+# ============================================================
+afk:
+  warning: "<red>⚠ Вы выглядите как AFK! Таймер промокода <bold>ПРИОСТАНОВЛЕН</bold></red>"
+  warning-hint: "<gray>Пошевелитесь, чтобы продолжить отсчёт</gray>"
+  resume: "<green>✅ Вы снова активны! Отсчёт времени возобновлён.</green>"
+
+# ============================================================
+#                    ПРОГРЕСС
+# ============================================================
+progress:
+  title: "<gold>=== Прогресс по коду <gold>%code%</gold> ===</gold>"
+  played: "<gray>Отыграно: <green>%current%</green>/<gold>%need%</gold> <gray>минут</gray>"
+  status-waiting: "<gray>Статус: <yellow>⏳ Ожидание...</yellow></gray>"
+  status-done: "<gray>Статус: <green>✅ Награда получена!</green></gray>"
+
+# ============================================================
+#                    НАГРАДА
+# ============================================================
+reward:
+  done: "<green>Поздравляем! Вы выполнили условия промокода!</green>"
+  details:
+    - "<gray>├─ Группа: <gold>%group%</gold> на <gold>%time%</gold> мин</gray>"
+    - "<gray>└─ Ютубер получил: <gold>%reward%</gold> монет</gray>"
+  group-given: "<green>Вам выдана группа <gold>%group%</gold> на <gold>%time%</gold> минут!</green>"
+  already-has-group: "<gold>У вас уже есть группа %group%! Время продлено на %time% минут.</gold>"
+
+# ============================================================
+#                    ИНФОРМАЦИЯ
+# ============================================================
+info:
+  title: "<gold>=== Ваш промокод <gold>%code%</gold> ===</gold>"
+  group: "<gray>Группа: <gold>%group%</gold></gray>"
+  duration: "<gray>Длительность: <gold>%duration%</gold> мин</gray>"
+  reward: "<gray>Награда ютуберу: <gold>%reward%</gold> монет</gray>"
+  playtime: "<gray>Нужно отыграть: <gold>%playtime%</gold> мин</gray>"
+  players: "<gray>Игроков: <gold>%players%</gold></gray>"
+  completed: "<gray>Выполнили: <gold>%completed%</gold></gray>"
+  balance: "<gray>Текущий баланс: <gold>%balance%</gold> монет</gray>"
+
+# ============================================================
+#                    ПОКАЗАТЬ (Админ)
+# ============================================================
+show:
+  title: "<gold>=== Информация о коде <gold>%code%</gold> ===</gold>"
+  author: "<gray>Автор: <gold>%author%</gold></gray>"
+  group: "<gray>Группа: <gold>%group%</gold></gray>"
+  duration: "<gray>Длительность: <gold>%duration%</gold> мин</gray>"
+  reward: "<gray>Награда ютуберу: <gold>%reward%</gold> монет</gray>"
+  playtime: "<gray>Нужно отыграть: <gold>%playtime%</gold> мин</gray>"
+  players: "<gray>Игроков: <gold>%players%</gold></gray>"
+  completed: "<gray>Выполнили: <gold>%completed%</gold></gray>"
+  balance: "<gray>Баланс: <gold>%balance%</gold> монет</gray>"
+
+# ============================================================
+#                    БАЛАНС
+# ============================================================
+balance:
+  added: "<green>Добавлено <gold>%amount%</gold> к балансу кода <gold>%code%</gold></green>"
+  removed: "<green>Убрано <gold>%amount%</gold> из баланса кода <gold>%code%</gold></green>"
+  current: "<gray>Текущий баланс: <gold>%balance%</gold> монет</gray>"
+  invalid-amount: "<red>Введите корректное число!</red>"
+  invalid-action: "<red>Используйте: /promo balance add/remove <code> <amount></red>"
+
+# ============================================================
+#                    ТОП
+# ============================================================
+top:
+  title: "<gold>=== ТОП Промокодов ===</gold>"
+  no-codes: "<gray>Промокодов не найдено</gray>"
+
+# ============================================================
+#                    IP СТАТИСТИКА
+# ============================================================
+ipstats:
+  title: "<gold>=== Статистика IP для <gold>%player%</gold> ===</gold>"
+  info: "<gray>%info%</gray>"
+  activations: "<gray>Всего активаций с этого IP: <gold>%count%</gold></gray>"
+  no-data: "<gray>Нет данных по IP</gray>"

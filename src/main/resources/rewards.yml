@@ -1,0 +1,35 @@
+# ============================================================
+#                   Rewards Configuration
+# ============================================================
+
+# Группа по умолчанию для новых кодов
+default-group: "VIP"
+
+# Настройки наград
+rewards:
+  # Включить звук при получении награды
+  enable-sound: true
+  # Звук при получении награды
+  sound: ENTITY_PLAYER_LEVELUP
+  # Громкость звука
+  sound-volume: 1.0
+  # Высота звука
+  sound-pitch: 1.0
+
+  # Включить частицы при получении награды
+  enable-particles: true
+  # Тип частиц
+  particle: FIREWORK
+  # Количество частиц
+  particle-count: 30
+
+  # Включить Title-сообщение при получении награды
+  enable-title: true
+  # Title текст
+  title-text: "&a&lНАГРАДА ПОЛУЧЕНА!"
+  # Subtitle текст
+  subtitle-text: "&eВы получили группу!"
+  # Время показа Title (тики)
+  title-fade-in: 10
+  title-stay: 40
+  title-fade-out: 10
